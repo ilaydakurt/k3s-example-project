@@ -1,0 +1,46 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 32px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.sidebar .nav-link {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: var(--bs-gray-800);
+  font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+  transition: 0.4s;
+  background-color: var(--bs-gray-300);
+}
+
+.selection-text {
+  border: none;
+  background: transparent;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  width: 100%;
+  resize: none;
+}
+
+.semantic-tags {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.cursor-pointer {
+  cursor:pointer;
+}
+

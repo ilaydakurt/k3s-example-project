@@ -1,0 +1,14 @@
+<nav id="sidebarMenu" class="h-100">
+    <div class="pt-5">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link{% if request.path == '/feed/post/'%} active{% endif %}"
+                    href="{{DOMAIN_URL}}/feed/post/">Recent Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{% if request.path == '/feed/post/own_posts/'%} active{% endif %}"
+                    href="{{DOMAIN_URL}}/feed/post/own_posts/">Your Posts</a>
+            </li>
+        </ul>
+    </div>
+</nav>

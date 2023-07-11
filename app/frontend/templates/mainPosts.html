@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+  <h6> {{ space.title }} </h6>
+  <p> {{ space.description }} </p>
+</div>
+
+{% for post in space.space_posts %}
+<div class="card mb-3" style="max-width: 720px;margin-left: auto; margin-right: auto">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ post.image }}" class="img-fluid rounded-start" alt="Post">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.owner.first_name }} {{ post.owner.last_name }}</h5>
+        <p class="card-text">{{ post.platform }}</p>
+        <p class="card-text">{{ post.created_time }}</p>
+        <p class="card-text">{{ post.title }}</p>
+        <p class="card-text">{{ post.description }}</p>
+        <a class="btn btn-outline-dark" href='{{post.post_link}}' target="_blank">{{post.post_link}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

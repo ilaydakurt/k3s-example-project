@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form id="main" class="border border-2 rounded-3 p-4" method="post" enctype="multipart/form-data" action="{{DOMAIN_URL}}/feed/post/">
+  {% csrf_token %}
+  <h3>Create a Post</h3>
+
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input id="title" class="form-control" type="text" name="title" value="{{ title }}" placeholder="Title" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input id="description" class="form-control" type="text" name="description" value="{{ description }}"
+      placeholder="Description" />
+  </div>
+
+  <div class="mb-3">
+    <label for="post_link" class="form-label">Link</label>
+    <input id="post_link" class="form-control" type="text" name="post_link" value="{{ post_link }}" placeholder="Link"
+      required />
+  </div>
+
+  <div class="mb-3">
+    <label for="platform" class="form-label">Platform</label>
+    <input id="platform" class="form-control" type="text" name="platform" value="{{ platform }}"
+      placeholder="Platform" />
+  </div>
+
+  <div class="input-group mb-3">
+    <input type="file" class="form-control" id="image" name="image" placeholder="Choose a File">
+  </div>
+
+  <button class="btn btn-dark">Submit</button>
+
+
+  <div class="modal fade" id="confirmationModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add existing link</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          This link already exists.
+        </div>
+
+        <div class="modal-footer">
+          {% if confirmation_modal %}
+          <input type="hidden" name="is_confirmed" value="True">
+          {% endif %}
+          <button class="btn btn-outline-dark" data-bs-dismiss="modal">Yes</button>
+
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+<p></p>
+
+
+<h3>Recent Posts</h3>
+
+{% for post in posts %}
+{% include '_post.html' %}
+{% endfor %}
+
+{% endblock %}

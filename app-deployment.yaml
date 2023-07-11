@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/swe599-k3s-application-default: "true"
+        io.kompose.service: app
+    spec:
+      containers:
+        - args:
+            - sh
+            - -c
+            - "python manage.py makemigrations &&\n       python manage.py migrate &&           \n       python manage.py runserver 0.0.0.0:8000"
+          env:
+            - name: DB_HOST
+              value: db-service
+            - name: DB_NAME
+              value: app
+            - name: DB_PASS
+              value: test
+            - name: DB_USER
+              value: ilayda
+          image: ilaydaaakurt/swe599:latest
+          name: app
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "200m"  # CPU talebi (Minimum)
+              memory: "256Mi"  # Bellek talebi (Minimum)
+            limits:
+              cpu: "500m"  # CPU sınırı (Maksimum)
+              memory: "512Mi"  # Bellek sınırı (Maksimum)
+      restartPolicy: Always
+status: {}

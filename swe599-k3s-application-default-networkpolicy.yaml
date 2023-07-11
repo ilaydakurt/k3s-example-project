@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: swe599-k3s-application-default
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/swe599-k3s-application-default: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/swe599-k3s-application-default: "true"

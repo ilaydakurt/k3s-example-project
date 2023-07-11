@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&           
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db-service
+      - DB_NAME=app
+      - DB_USER=ilayda
+      - DB_PASS=test
+    depends_on:
+      - db-service
+      
+  db-service:
+    image: postgres:12-alpine
+    restart: always
+
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: ilayda
+      POSTGRES_PASSWORD: test
+
+
+# kubectl port-forward service/app 8000:8000
+# kubectl autoscale deployment app --cpu-percent=50 --min=1 --max=10
+# kubectl get hpa
